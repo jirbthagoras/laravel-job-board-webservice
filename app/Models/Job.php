@@ -6,27 +6,27 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Worker extends Model
+class Job extends Model
 {
-    protected $table = "workers";
+    protected $table = 'tasks';
     protected $primaryKey = "id";
     protected $keyType = "integer";
-
-    public $timestamps = false;
+    public $timestamps = true;
 
     protected $fillable = [
-        "age",
-        "prophecy",
-        "user_id"
+        "name",
+        "description",
+        "salary",
+        "company_id",
     ];
 
-    public function user(): BelongsTo
+    public function company(): BelongsTo
     {
-        return $this->belongsTo(User::class, "user_id", "id");
+        return $this->belongsTo(Company::class, "company_id", "id");
     }
 
     public function applications(): HasMany
     {
-        return $this->hasMany(Application::class, "worker_id", "id");
+        return $this->hasMany(Application::class, "job_id", "id");
     }
 }
