@@ -36,4 +36,21 @@ class GuestControllerTest extends TestCase
             ],
         ]);
     }
+
+    public function testGuestLogin()
+    {
+
+        $this->testGuestWorkerRegister();
+
+        $response = $this->post('/api/login', [
+            "email" => "jabriel@gmail.com",
+            "password" => "halosemuamaribermain",
+        ])
+            ->assertStatus(200);
+
+        var_dump(auth()->user()->toJson(JSON_PRETTY_PRINT));
+
+    }
+
+
 }

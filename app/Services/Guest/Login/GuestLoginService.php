@@ -8,7 +8,7 @@ trait GuestLoginService
 {
     public function login($data)
     {
-        return "Login";
+        auth()->attempt($data);
     }
 
 
