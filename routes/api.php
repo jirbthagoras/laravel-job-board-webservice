@@ -16,6 +16,9 @@ Route::fallback(function () {
     ]);
 });
 
+Route::post('/login', [\App\Http\Controllers\GuestController::class, 'login']);
+
+
 //Route::group([
 //    'middleware' => 'api',
 //    'prefix' => 'auth',

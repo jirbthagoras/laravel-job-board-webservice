@@ -18,7 +18,7 @@ class WorkerSeeder extends Seeder
 
         Worker::query()
             ->create([
-                "age" => "30",
+                "age" => 15,
                 "prophecy" => "Software Engineer",
                 "user_id" => $user->id
             ]);

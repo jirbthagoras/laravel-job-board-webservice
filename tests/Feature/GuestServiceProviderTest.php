@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Http\Requests\Guest\GuestLoginRequest;
 use App\Services\Guest\Login\GuestLoginService;
 use App\Services\Guest\Register\GuestRegisterService;
 use Illuminate\Foundation\Testing\RefreshDatabase;

@@ -6,14 +6,14 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class GuestLoginRequest extends FormRequest
+class GuestWorkerRegisterRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return auth()->user() != null;
+        return true;
     }
 
     /**
@@ -24,7 +24,11 @@ class GuestLoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "email" => ['required', 'email', 'string', 'max:'],
+            "name" => ["required", "string", "max:100"],
+            "email" => ["required", "email", "max:100"],
+            "password" => ["required", "string", "max:100", "min:6"],
+            "age" => ["required", "integer", "between:1,100"],
+            "role" => ["required", "string", "max:100"],
         ];
     }
 
