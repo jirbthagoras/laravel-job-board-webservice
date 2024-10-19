@@ -1,11 +1,12 @@
 <h1>Job Board Web Service</h1>
 <p>Just a normal job board webservice made by myself using Laravel 11, JWT auth, and Postgres</p>
+<p>Also, I implements a new approach for the service part, where i use trait as the main idea for my service instead of using interface. Hard to make you guys understand, just take a look at my code :D</p>
 
 <hr>
 
 <h1>API Docs</h1>
 
-<p>This API Endpoints distinguished by User's status (Logged in Or Not)</p>
+<p>This API Endpoints distinguished by it's Prefix</p>
 
 <p><a href="https://app.swaggerhub.com/apis/HANSJABRIEL/general-endpoints/1.0.0">General Endpoints</a></p>
 
