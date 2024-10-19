@@ -17,6 +17,7 @@ Route::fallback(function () {
 });
 
 Route::post('/login', [\App\Http\Controllers\GuestController::class, 'login']);
+Route::post('/worker/register', [\App\Http\Controllers\GuestController::class, 'workerRegister']);
 
 
 //Route::group([

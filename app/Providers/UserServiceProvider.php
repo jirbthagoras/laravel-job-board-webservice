@@ -3,26 +3,20 @@
 namespace App\Providers;
 
 use App\Services\User\Logout\UserLogoutService;
-use App\Services\User\Logout\UserLogoutServiceImpl;
+use App\Services\User\UserService;
 use Illuminate\Support\ServiceProvider;
 
 class UserServiceProvider extends ServiceProvider
 {
-    public $singletons = [
-      UserLogoutService::class => UserLogoutServiceImpl::class
-    ];
-
-    public function provides()
-    {
-        return [UserLogoutService::class];
-    }
 
     /**
      * Register services.
      */
     public function register(): void
     {
-        //
+        $this->app->singleton(UserService::class, function ($app) {
+            return new UserService();
+        });
     }
 
     /**

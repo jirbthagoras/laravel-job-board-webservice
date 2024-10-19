@@ -2,16 +2,27 @@
 
 namespace Tests\Feature;
 
+use App\Http\Requests\Guest\GuestCompanyRegisterRequest;
 use App\Http\Requests\Guest\GuestLoginRequest;
-use App\Http\Requests\GuestCompanyRegisterRequest;
-use App\Http\Requests\GuestWorkerRegisterRequest;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
+use App\Http\Requests\Guest\GuestWorkerRegisterRequest;
+use App\Models\User;
+use App\Models\Worker;
+use Database\Seeders\CompanySeeder;
+use Database\Seeders\UserSeed;
+use Database\Seeders\WorkerSeeder;
 use Illuminate\Support\Facades\Validator;
 use Tests\TestCase;
 
 class GuestRequestTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        User::query()->delete();
+    }
+
+
     /**
      * A basic feature test example.
      */
@@ -19,7 +30,7 @@ class GuestRequestTest extends TestCase
     {
         $data = [
             "email" => "admin@gmail.com",
-            "password" => "hahahay"
+            "password" => "ssssss"
         ];
 
         $request = new GuestLoginRequest();
@@ -34,9 +45,11 @@ class GuestRequestTest extends TestCase
     public function testWorkerRegisterRequest()
     {
 
+        $this->seed([UserSeed::class, WorkerSeeder::class]);
+
         $data = [
-            "name" => "Athallah",
-            "email" => "athallah@gmail.com",
+            "name" => "Athalla",
+            "email" => "athalla@gmail.com",
             "password" => "hahahay",
             "age" => 16,
             "role" => "Software Engineer"
@@ -46,19 +59,19 @@ class GuestRequestTest extends TestCase
 
         $validator = Validator::make($data, $request->rules());
 
-        var_dump($validator->validate());
-
-        $this->assertTrue($validator->passes());
+        $this->assertTrue($validator->fails());
 
     }
 
     public function testCompanyRegisterRequest()
     {
 
+        $this->seed([UserSeed::class, CompanySeeder::class]);
+
         $data = [
             "name" => "Athallah",
-            "email" => "athallah@gmail.com",
-            "password" => "hahahay",
+            "email" => "athalla@gmail.com",
+            "password" => "sssssssssd",
             "address" => "Jl. BaturSari 1"
         ];
 
@@ -66,9 +79,7 @@ class GuestRequestTest extends TestCase
 
         $validator = Validator::make($data, $request->rules());
 
-        var_dump($validator->validate());
-
-        $this->assertTrue($validator->passes());
+        $this->assertTrue($validator->fails());
 
     }
 

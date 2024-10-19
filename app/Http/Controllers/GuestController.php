@@ -2,29 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Guest\GuestCompanyRegisterRequest;
 use App\Http\Requests\Guest\GuestLoginRequest;
-use App\Http\Requests\GuestCompanyRegisterRequest;
-use App\Http\Requests\GuestWorkerRegisterRequest;
+use App\Http\Requests\Guest\GuestWorkerRegisterRequest;
 use App\Http\Requests\GuestWorkerRegisterRequestTest;
+use App\Services\Guest\GuestService;
 use App\Services\Guest\Login\GuestLoginService;
 use App\Services\Guest\Register\GuestRegisterService;
-use Illuminate\Http\Request;
 
 class GuestController extends Controller
 {
-    protected GuestLoginService $loginService;
-
-    protected GuestRegisterService $registerService;
+    protected GuestService $guestService;
 
     /**
-     * @param GuestLoginService $loginService
-     * @param GuestRegisterService $registerService
+     * @param GuestService $guestService
      */
-    public function __construct(GuestLoginService $loginService, GuestRegisterService $registerService)
+    public function __construct(GuestService $guestService)
     {
-        $this->loginService = $loginService;
-        $this->registerService = $registerService;
+        $this->guestService = $guestService;
     }
+
 
     public function login(GuestLoginRequest $request)
     {
@@ -37,7 +34,7 @@ class GuestController extends Controller
     {
         $data = $request->validated();
 
-        return $data;
+        return $this->guestService->workerRegister($data);
     }
 
     public function companyRegister(GuestCompanyRegisterRequest $request)

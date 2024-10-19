@@ -2,7 +2,11 @@
 
 namespace App\Services\User\Logout;
 
-interface UserLogoutService
+trait UserLogoutService
 {
-    public function logout($data);
+    public function logout($data)
+    {
+       return "Logout";
+    }
+
 }

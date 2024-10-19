@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Http\Requests\Guest\GuestLoginRequest;
+use App\Services\Guest\GuestService;
 use App\Services\Guest\Login\GuestLoginService;
 use App\Services\Guest\Register\GuestRegisterService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -11,28 +12,21 @@ use Tests\TestCase;
 
 class GuestServiceProviderTest extends TestCase
 {
-    public GuestLoginService $guestLoginService;
-    public GuestRegisterService $guestRegisterService;
+    public GuestService $guestService;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->guestLoginService = $this->app->make(GuestLoginService::class);
-        $this->guestRegisterService = $this->app->make(GuestRegisterService::class);
+        $this->guestService = $this->app->make(GuestService::class);
     }
 
 
     /**
      * A basic feature test example.
      */
-    public function testUserLoginService(): void
+    public function testGuestLoginService(): void
     {
-        self::assertInstanceOf(GuestLoginService::class, $this->guestLoginService);
-    }
-
-    public function testUserRegisterService(): void
-    {
-        self::assertInstanceOf(GuestRegisterService::class, $this->guestRegisterService);
+        self::assertInstanceOf(GuestService::class, $this->guestService);
     }
 }

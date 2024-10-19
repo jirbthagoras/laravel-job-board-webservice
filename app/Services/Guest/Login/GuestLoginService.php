@@ -1,10 +1,15 @@
 <?php
 
 namespace App\Services\Guest\Login;
-use App\Models\User;
-use Illuminate\Http\Request;
 
-interface GuestLoginService
+use App\Models\User;
+
+trait GuestLoginService
 {
-    public function login($data);
+    public function login($data)
+    {
+        return "Login";
+    }
+
+
 }

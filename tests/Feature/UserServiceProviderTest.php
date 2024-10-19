@@ -3,19 +3,20 @@
 namespace Tests\Feature;
 
 use App\Services\User\Logout\UserLogoutService;
+use App\Services\User\UserService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class UserServiceProviderTest extends TestCase
 {
-    public UserLogoutService $userLogoutService;
+    public UserService $userService;
 
     protected function setUp():void
     {
         parent::setUp();
 
-        $this->userLogoutService =  $this->app->make(UserLogoutService::class);
+        $this->userService =  $this->app->make(UserService::class);
     }
 
 
@@ -24,6 +25,6 @@ class UserServiceProviderTest extends TestCase
      */
     public function testUserLogoutService(): void
     {
-        self::assertInstanceOf(UserLogoutService::class, $this->userLogoutService);
+        self::assertInstanceOf(UserService::class, $this->userService);
     }
 }
