@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('workers', function (Blueprint $table) {
             $table->id();
-            $table->string("age")->nullable(false);
-            $table->string("prophecy")->nullable(false);
+            $table->integer("age")->nullable(false);
+            $table->string("prophecy", 20)->nullable(false);
             $table->unsignedBigInteger("user_id")->nullable(false);
             $table->foreign("user_id")->references("id")->on("users")->onDelete("cascade");
+            $table->index(["age", "prophecy"]);
         });
     }
 

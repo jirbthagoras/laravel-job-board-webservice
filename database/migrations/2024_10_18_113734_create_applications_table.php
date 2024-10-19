@@ -13,13 +13,15 @@ return new class extends Migration
     {
         Schema::create('applications', function (Blueprint $table) {
             $table->id();
-            $table->string("status")->nullable(false);
+            $table->string("status", 10)->nullable(false);
             $table->unsignedBigInteger("worker_id")->nullable(false);
             $table->unsignedBigInteger("job_id")->nullable(false);
             $table->timestamps();
 
             $table->foreign('worker_id')->references('id')->on('workers')->onDelete('cascade');
             $table->foreign('job_id')->references('id')->on('tasks')->onDelete('cascade');
+
+            $table->index(["status"]);
         });
     }
 

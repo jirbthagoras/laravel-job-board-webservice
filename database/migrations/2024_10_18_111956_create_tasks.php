@@ -13,13 +13,15 @@ return new class extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable(false);
+            $table->string('name', 50)->nullable(false);
             $table->text('description')->nullable();
             $table->integer("salary")->nullable();
             $table->unsignedBigInteger("company_id")->nullable(false);
             $table->timestamps();
 
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
+
+            $table->index(["name", "description", "salary"]);
         });
     }
 
