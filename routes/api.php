@@ -14,12 +14,16 @@ use Illuminate\Support\Facades\Route;
 //});
 
 Route::group([
-    'middleware' => 'api',
+    'middleware' => ["api", \Illuminate\Session\Middleware\StartSession::class],
 ], function ($router) {
     Route::post("/login", [\App\Http\Controllers\GuestController::class, 'login'])
+        ->middleware("onlyGuest")
         ->name('login');
     Route::delete("/logout", [\App\Http\Controllers\UserController::class, "logout"])
         ->name('logout')
+        ->middleware("auth:api");
+    Route::get("/me", [\App\Http\Controllers\UserController::class, "me"])
+        ->name('me')
         ->middleware("auth:api");
 });
 
@@ -28,7 +32,7 @@ Route::group([
     "prefix" => "worker"
 ], function ($router) {
     Route::post("/register", [\App\Http\Controllers\GuestController::class, 'workerRegister'])
-        ->name('worker.register')
+        ->middleware("onlyGuest")
         ->name("worker.register");
 });
 Route::group([
@@ -36,6 +40,6 @@ Route::group([
     "prefix" => "company"
 ], function ($router) {
     Route::post("/register", [\App\Http\Controllers\GuestController::class, 'companyRegister'])
-        ->name('company.register')
+        ->middleware("onlyGuest")
         ->name("company.register");
 });

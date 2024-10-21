@@ -3,7 +3,12 @@
 namespace Tests\Feature\Controllers;
 
 use App\Models\User;
+use App\Models\Worker;
+use Database\Seeders\UserSeed;
+use Database\Seeders\WorkerSeeder;
+use Illuminate\Support\Facades\Session;
 use Tests\TestCase;
+use function PHPUnit\Framework\isNull;
 
 class GuestControllerTest extends TestCase
 {
@@ -53,7 +58,6 @@ class GuestControllerTest extends TestCase
 
     public function testGuestLogin()
     {
-
         $this->testGuestWorkerRegister();
 
         $response = $this->post('/api/login', [
@@ -62,7 +66,7 @@ class GuestControllerTest extends TestCase
         ])
             ->assertStatus(200);
 
-        var_dump(auth()->user()->toJson(JSON_PRETTY_PRINT));
+
 
     }
 

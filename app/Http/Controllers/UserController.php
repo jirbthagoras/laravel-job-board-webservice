@@ -21,4 +21,9 @@ class UserController extends Controller
     {
         return $this->userService->logout();
     }
+
+    public function me()
+    {
+        return $this->userService->me();
+    }
 }

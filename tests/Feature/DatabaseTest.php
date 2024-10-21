@@ -52,6 +52,8 @@ class DatabaseTest extends TestCase
 
         $company = Company::query()->first();
 
+        var_dump($user->company->toJson());
+
         self::assertEquals($user->id, $company->user_id);
     }
 

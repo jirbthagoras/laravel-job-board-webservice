@@ -9,6 +9,7 @@ use App\Http\Requests\GuestWorkerRegisterRequestTest;
 use App\Services\Guest\GuestService;
 use App\Services\Guest\Login\GuestLoginService;
 use App\Services\Guest\Register\GuestRegisterService;
+use MongoDB\Driver\Session;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class GuestController extends Controller
@@ -28,13 +29,7 @@ class GuestController extends Controller
     {
         $data = $request->validated();
 
-        if (! $token = auth()->attempt($data)) {
-            return response()->json(['error' =>[
-                'message' => 'Password Or Email could be wrong.'
-            ]], 400);
-        }
-
-        return $this->respondWithToken($token);
+        return $this->guestService->login($data);
     }
 
     public function workerRegister(GuestWorkerRegisterRequest $request)
@@ -49,14 +44,5 @@ class GuestController extends Controller
         $data = $request->validated();
 
         return $this->guestService->companyRegister($data);
-    }
-
-    protected function respondWithToken($token)
-    {
-        return response()->json([
-            'access_token' => $token,
-            'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60
-        ]);
     }
 }
