@@ -1,11 +1,8 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Providers;
 
-use App\Services\User\Logout\UserLogoutService;
 use App\Services\User\UserService;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class UserServiceProviderTest extends TestCase

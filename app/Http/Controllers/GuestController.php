@@ -48,7 +48,7 @@ class GuestController extends Controller
     {
         $data = $request->validated();
 
-        return $data;
+        return $this->guestService->companyRegister($data);
     }
 
     protected function respondWithToken($token)

@@ -1,12 +1,11 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Requests;
 
 use App\Http\Requests\Guest\GuestCompanyRegisterRequest;
 use App\Http\Requests\Guest\GuestLoginRequest;
 use App\Http\Requests\Guest\GuestWorkerRegisterRequest;
 use App\Models\User;
-use App\Models\Worker;
 use Database\Seeders\CompanySeeder;
 use Database\Seeders\UserSeed;
 use Database\Seeders\WorkerSeeder;

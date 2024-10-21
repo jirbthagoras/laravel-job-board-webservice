@@ -1,10 +1,8 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Controllers;
 
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class GuestControllerTest extends TestCase
@@ -35,6 +33,22 @@ class GuestControllerTest extends TestCase
                 "message" => "Worker Successfully Registered, you can login now."
             ],
         ]);
+    }
+
+    public function testGuestCompanyRegister()
+    {
+        $this->post('/api/company/register', [
+            "name" => "Athalla",
+            "email" => "jabriel@gmail.com",
+            "password" => "halosemuamaribermain",
+            "address" => "Jl. Sigma Skibidi"
+        ])
+            ->assertStatus(200)
+            ->assertJson([
+                "data" => [
+                    "message" => "Company Successfully Registered, you can login now."
+                ],
+            ]);
     }
 
     public function testGuestLogin()

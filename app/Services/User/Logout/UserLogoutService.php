@@ -2,11 +2,19 @@
 
 namespace App\Services\User\Logout;
 
+use Tymon\JWTAuth\Facades\JWTAuth;
+
 trait UserLogoutService
 {
-    public function logout($data)
+    public function logout()
     {
-       return "Logout";
+        JWTAuth::invalidate(JWTAuth::getToken());
+
+        return response()->json([
+            "data" => [
+                "message" => "Successfully Logged Out "
+            ]
+        ]);
     }
 
 }
