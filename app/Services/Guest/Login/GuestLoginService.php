@@ -23,7 +23,7 @@ trait GuestLoginService
                 $profile = $user->company;
             }
 
-        \session()->put("profile",
+        session()->put("profile",
             [
                 "id" => $user->id,
                 "name" => $user->name,

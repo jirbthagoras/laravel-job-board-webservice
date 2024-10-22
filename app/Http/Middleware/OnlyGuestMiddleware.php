@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Exceptions\AlreadyLoggedInException;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,12 +18,14 @@ class OnlyGuestMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         if(auth()->check()) {
-            return \response()->json([
-                "data" =>
-                [
-                    "message" => "You're Already Logged In"
-                ]
-            ])->setStatusCode(401);
+//            return \response()->json([
+//                "data" =>
+//                [
+//                    "message" => "You're Already Logged In"
+//                ]
+//            ])->setStatusCode(401);
+
+            throw AlreadyLoggedInException::AlreadyloggedIn();
         }
 
         return $next($request);
