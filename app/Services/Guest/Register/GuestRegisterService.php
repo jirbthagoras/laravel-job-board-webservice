@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 
 trait GuestRegisterService
 {
-    public function workerRegister($data)
+    public function workerRegister(array $data)
     {
         $user = User::query()
             ->create(

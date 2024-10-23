@@ -4,6 +4,8 @@ use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+
+// General Routes
 Route::group([
     'middleware' => ["api", \Illuminate\Session\Middleware\StartSession::class],
 ], function ($router) {
@@ -18,6 +20,7 @@ Route::group([
         ->middleware("auth:api");
 });
 
+// Worker Routes
 Route::group([
     "middleware" => "api",
     "prefix" => "worker"
@@ -26,6 +29,8 @@ Route::group([
         ->middleware("onlyGuest")
         ->name("worker.register");
 });
+
+// Company Routes
 Route::group([
     "middleware" => "api",
     "prefix" => "company"
@@ -33,4 +38,7 @@ Route::group([
     Route::post("/register", [\App\Http\Controllers\GuestController::class, 'companyRegister'])
         ->middleware("onlyGuest")
         ->name("company.register");
+    Route::post("/job/create", [\App\Http\Controllers\CompanyController::class, 'createJob'])
+        ->middleware("auth:api")
+        ->name("job.create");
 });

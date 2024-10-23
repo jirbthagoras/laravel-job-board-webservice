@@ -8,7 +8,7 @@ use function PHPUnit\Framework\isNull;
 
 trait GuestLoginService
 {
-    public function login($data)
+    public function login(array $data)
     {
         if (! $token = auth()->attempt($data)) {
             return response()->json(['error' =>[

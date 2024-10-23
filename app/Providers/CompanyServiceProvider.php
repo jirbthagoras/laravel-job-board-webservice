@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Services\Company\CompanyService;
 use Illuminate\Support\ServiceProvider;
 
 class CompanyServiceProvider extends ServiceProvider
@@ -11,7 +12,9 @@ class CompanyServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->singleton(CompanyService::class, function ($app){
+            return new CompanyService();
+        });
     }
 
     /**

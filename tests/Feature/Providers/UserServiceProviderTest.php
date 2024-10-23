@@ -25,10 +25,5 @@ class UserServiceProviderTest extends TestCase
         self::assertInstanceOf(UserService::class, $this->userService);
     }
 
-    public function testUserMe()
-    {
-
-    }
-
 
 }
