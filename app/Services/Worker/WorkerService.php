@@ -2,13 +2,9 @@
 
 namespace App\Services\Worker;
 
+use App\Services\Worker\JobList\WorkerJobListService;
+
 class WorkerService
 {
-    /**
-     * Create a new class instance.
-     */
-    public function __construct()
-    {
-        //
-    }
+    use WorkerJobListService;
 }

@@ -28,6 +28,9 @@ Route::group([
     Route::post("/register", [\App\Http\Controllers\GuestController::class, 'workerRegister'])
         ->middleware("onlyGuest")
         ->name("worker.register");
+    Route::get("/job", [\App\Http\Controllers\WorkerController::class, "jobList"])
+        ->middleware("onlyWorker")
+        ->name("job.list");
 });
 
 // Company Routes

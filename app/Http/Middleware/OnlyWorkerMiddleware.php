@@ -3,12 +3,13 @@
 namespace App\Http\Middleware;
 
 use App\Exceptions\OnlyCompanyException;
+use App\Exceptions\OnlyWorkerException;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use function PHPUnit\Framework\isNull;
 
-class OnlyCompanyMiddleware
+class OnlyWorkerMiddleware
 {
     /**
      * Handle an incoming request.
@@ -17,9 +18,9 @@ class OnlyCompanyMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(! auth()->user()->company)
+        if(! auth()->user()->worker)
         {
-            throw OnlyCompanyException::OnlyCompany();
+            throw OnlyWorkerException::OnlyWorker();
         }
 
         return $next($request);

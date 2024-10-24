@@ -14,7 +14,8 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
             "onlyGuest" => \App\Http\Middleware\OnlyGuestMiddleware::class,
-            "onlyCompany" => \App\Http\Middleware\OnlyCompanyMiddleware::class
+            "onlyCompany" => \App\Http\Middleware\OnlyCompanyMiddleware::class,
+            "onlyWorker" => \App\Http\Middleware\OnlyWorkerMiddleware::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
@@ -28,6 +29,14 @@ return Application::configure(basePath: dirname(__DIR__))
         });
 
         $exceptions->renderable(function (\App\Exceptions\OnlyCompanyException $e, \Illuminate\Http\Request $request) {
+            return response()->json([
+                "errors" => [
+                    "message" => $e->getMessage(),
+                ]
+            ]);
+        });
+
+        $exceptions->renderable(function (\App\Exceptions\OnlyWorkerException $e, \Illuminate\Http\Request $request) {
             return response()->json([
                 "errors" => [
                     "message" => $e->getMessage(),
