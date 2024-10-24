@@ -2,13 +2,13 @@
 
 namespace App\Http\Middleware;
 
-use App\Exceptions\AlreadyLoggedInException;
+use App\Exceptions\OnlyCompanyException;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use function PHPUnit\Framework\isNull;
 
-class OnlyGuestMiddleware
+class OnlyCompanyMiddleware
 {
     /**
      * Handle an incoming request.
@@ -17,8 +17,9 @@ class OnlyGuestMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(auth()->check()) {
-            throw AlreadyLoggedInException::AlreadyloggedIn();
+        if(isNull(auth()->user()->worker))
+        {
+            throw OnlyCompanyException::OnlyCompany();
         }
 
         return $next($request);

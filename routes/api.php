@@ -40,5 +40,6 @@ Route::group([
         ->name("company.register");
     Route::post("/job/create", [\App\Http\Controllers\CompanyController::class, 'createJob'])
         ->middleware("auth:api")
+        ->middleware("onlyCompany")
         ->name("job.create");
 });

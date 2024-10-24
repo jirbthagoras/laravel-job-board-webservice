@@ -13,16 +13,26 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
-            "onlyGuest" => \App\Http\Middleware\OnlyGuestMiddleware::class
+            "onlyGuest" => \App\Http\Middleware\OnlyGuestMiddleware::class,
+            "onlyCompany" => \App\Http\Middleware\OnlyCompanyMiddleware::class
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        $exceptions->renderable(function(\App\Exceptions\AlreadyLoggedInException $e, \Illuminate\Http\Request $request)
-        {
+
+        $exceptions->renderable(function (\App\Exceptions\AlreadyLoggedInException $e, \Illuminate\Http\Request $request) {
             return response()->json([
-               "errors" => [
-                   "message" => $e->getMessage(),
-               ]
+                "errors" => [
+                    "message" => $e->getMessage(),
+                ]
             ]);
         });
+
+        $exceptions->renderable(function (\App\Exceptions\OnlyCompanyException $e, \Illuminate\Http\Request $request) {
+            return response()->json([
+                "errors" => [
+                    "message" => $e->getMessage(),
+                ]
+            ]);
+        });
+
     })->create();
