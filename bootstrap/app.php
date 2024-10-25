@@ -44,4 +44,13 @@ return Application::configure(basePath: dirname(__DIR__))
             ]);
         });
 
+        $exceptions->renderable(function (\App\Exceptions\JobException $e, \Illuminate\Http\Request $request) {
+            return response()->json([
+                "errors" => [
+                    "message" => $e->getMessage(),
+                ]
+            ]);
+        });
+
+        // TODO: TEST APAKAH MENGGUNAKAN EXCEPTION PARENT CLASS BISA BERHASIL MENERAPKAN DRY?
     })->create();

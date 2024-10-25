@@ -22,7 +22,7 @@ Route::group([
 
 // Worker Routes
 Route::group([
-    "middleware" => "api",
+    "middleware" => ["api"],
     "prefix" => "worker"
 ], function ($router) {
     Route::post("/register", [\App\Http\Controllers\GuestController::class, 'workerRegister'])
@@ -30,7 +30,13 @@ Route::group([
         ->name("worker.register");
     Route::get("/job", [\App\Http\Controllers\WorkerController::class, "jobList"])
         ->middleware("onlyWorker")
+        ->middleware("auth:api")
         ->name("job.list");
+    Route::post("/job/apply/{jobId}", [\App\Http\Controllers\WorkerController::class, "apply"])
+        ->where("jobId", "[0-9]+")
+        ->middleware("onlyWorker")
+        ->middleware("auth:api")
+        ->name("job.apply");
 });
 
 // Company Routes

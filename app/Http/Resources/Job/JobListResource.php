@@ -15,10 +15,15 @@ class JobListResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            "id" => $this->id,
             "name" => $this->name,
             "description" => $this->description,
             "salary" => $this->salary,
-            "company" => $this->company->toArray()
+            "company" => [
+                "name" => $this->company->user->name,
+                "email" => $this->company->user->email,
+                "address" => $this->company->address,
+            ]
         ];
     }
 }
