@@ -31,4 +31,15 @@ class CompanyController extends Controller
             ]
         ]);
     }
+
+    public function deleteJob(string $jobId)
+    {
+        $this->companyService->deleteJob($jobId);
+
+        return response()->json([
+            "data" => [
+                "message" => "Job Successfully Deleted"
+            ]
+        ]);
+    }
 }

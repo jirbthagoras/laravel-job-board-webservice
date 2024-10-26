@@ -60,4 +60,9 @@ Route::group([
         ->middleware("auth:api")
         ->middleware("onlyCompany")
         ->name("job.create");
+    Route::delete("/job/delete/{jobId}", [\App\Http\Controllers\CompanyController::class, 'deleteJob'])
+        ->middleware("auth:api")
+        ->middleware("onlyCompany")
+        ->where("jobId", "[0-9]+")
+        ->name("job.delete");
 });

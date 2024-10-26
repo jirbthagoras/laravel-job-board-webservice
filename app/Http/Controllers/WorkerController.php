@@ -21,7 +21,7 @@ class WorkerController extends Controller
     public function jobList()
     {
         return response()->json([
-            "data" => $this->workerService->jobList()
+            "jobs" => $this->workerService->jobList()
         ]);
     }
 

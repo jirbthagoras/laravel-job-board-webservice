@@ -22,7 +22,7 @@
 
 <h1>Database Design</h1>
 
-<p>TO BE ADDED</p>
+<a href="https://drawsql.app/teams/database-132/diagrams/job-board"><p>Database Design</p></a>
 
 <hr>
 
