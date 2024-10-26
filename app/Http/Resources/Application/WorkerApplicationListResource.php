@@ -18,6 +18,8 @@ class WorkerApplicationListResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            "id" => $this->id,
+            "worker_id" => $this->worker->id,
             "name" => $this->job->name,
             "description" => $this->job->description,
             "salary" => $this->job->salary,

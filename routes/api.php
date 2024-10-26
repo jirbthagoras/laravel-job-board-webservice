@@ -41,6 +41,11 @@ Route::group([
         ->middleware("auth:api")
         ->middleware("onlyWorker")
         ->name("application.list");
+    Route::delete("/application/delete/{applicationId}", [\App\Http\Controllers\WorkerController::class, "deleteApplication"])
+        ->middleware("onlyWorker")
+        ->middleware("auth:api")
+        ->where("applicationId", "[0-9]+")
+        ->name("application.delete");
 });
 
 // Company Routes

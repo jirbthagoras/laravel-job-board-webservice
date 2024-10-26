@@ -41,4 +41,15 @@ class WorkerController extends Controller
             "Applications" => $this->workerService->applicationList(),
         ]);
     }
+
+    public function deleteApplication(string $applicationId)
+    {
+        $this->workerService->deleteApplication($applicationId);
+
+        return response()->json([
+           "data" => [
+               "message" => "Application Successfully Deleted, Congrats!"
+           ]
+        ]);
+    }
 }
