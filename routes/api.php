@@ -37,6 +37,10 @@ Route::group([
         ->middleware("onlyWorker")
         ->middleware("auth:api")
         ->name("job.apply");
+    Route::get("/application", [\App\Http\Controllers\WorkerController::class, "applicationList"])
+        ->middleware("auth:api")
+        ->middleware("onlyWorker")
+        ->name("application.list");
 });
 
 // Company Routes

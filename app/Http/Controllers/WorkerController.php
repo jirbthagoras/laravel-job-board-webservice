@@ -34,4 +34,11 @@ class WorkerController extends Controller
             ]
         ]);
     }
+
+    public function applicationList()
+    {
+        return response()->json([
+            "Applications" => $this->workerService->applicationList(),
+        ]);
+    }
 }

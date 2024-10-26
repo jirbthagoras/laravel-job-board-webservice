@@ -21,13 +21,17 @@ trait GuestLoginService
         if(! $profile = $user->worker)
             {
                 $profile = $user->company;
-            }
+                $status = "Company";
+            } else {
+            $status = "Worker";
+        }
 
         session()->put("profile",
             [
                 "id" => $user->id,
                 "name" => $user->name,
                 "email" => $user->email,
+                "status" => $status,
                 "profile" => $profile,
             ]
         );
