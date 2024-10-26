@@ -15,7 +15,7 @@ trait WorkerJobApplyService
             ->exists())
         {
             JobException::JobNotFound();
-        } elseif (! Application::query()
+        } elseif (Application::query()
             ->where('worker_id', "=", auth()->user()->id)
             ->exists())
         {

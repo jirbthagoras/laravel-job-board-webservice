@@ -42,4 +42,22 @@ class CompanyController extends Controller
             ]
         ]);
     }
+
+    public function listJobApplication()
+    {
+        return response()->json([
+            "jobs" => $this->companyService->jobApplicationList()
+        ]);
+    }
+
+    public function acceptApplication(string $jobId, string $applicationId)
+    {
+        $this->companyService->acceptApplication($jobId, $applicationId);
+
+        return response()->json([
+            "data" => [
+                "message" => "Application Successfully Accepted"
+            ]
+        ]);
+    }
 }

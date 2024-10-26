@@ -65,4 +65,15 @@ Route::group([
         ->middleware("onlyCompany")
         ->where("jobId", "[0-9]+")
         ->name("job.delete");
+    Route::get("/job/application", [\App\Http\Controllers\CompanyController::class, "listJobApplication"])
+        ->middleware("auth:api")
+        ->middleware("onlyCompany")
+        ->name("company.application.list");
+    Route::put("/job/accept/{jobId}/{applicationId}", [\App\Http\Controllers\CompanyController::class, "acceptApplication"])
+        ->middleware("onlyCompany")
+        ->middleware("auth:api")
+        ->where("jobId", "[0-9]+")
+        ->where("applicationId", "[0-9]+")
+        ->where("applicationId", "[0-9]+")
+        ->name("job.accept");
 });
